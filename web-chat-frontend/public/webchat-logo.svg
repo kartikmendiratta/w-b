@@ -1,0 +1,18 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular Frame -->
+  <circle cx="60" cy="60" r="58" stroke="#000000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Primary Chat Bubble -->
+  <path d="M35 35 C35 30, 40 25, 45 25 L55 25 C60 25, 65 30, 65 35 L65 45 C65 50, 60 55, 55 55 L50 55 L47 58 L50 55 L45 55 C40 55, 35 50, 35 45 Z" stroke="#000000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Typing Dots in Primary Bubble -->
+  <circle cx="45" cy="40" r="2" fill="#000000"/>
+  <circle cx="50" cy="40" r="2" fill="#000000"/>
+  <circle cx="55" cy="40" r="2" fill="#000000"/>
+  
+  <!-- Secondary Chat Bubble -->
+  <path d="M55 50 C55 47, 57 45, 60 45 L70 45 C73 45, 75 47, 75 50 L75 58 C75 61, 73 63, 70 63 L65 63 L62 66 L65 63 L60 63 C57 63, 55 61, 55 58 Z" stroke="#000000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Text: webchat -->
+  <text x="60" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#000000">webchat</text>
+</svg>
