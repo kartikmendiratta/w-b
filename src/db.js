@@ -1,10 +1,6 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 
-dotenv.config();
-
-// Load MongoDB URI from environment, fall back to the previous hardcoded value
-const mongoURI = process.env.MONGO_URI ;
+const mongoURI = 'mongodb+srv://testkartik770_db_user:%23itsnote%40%24Y007@webchat.72l7qdm.mongodb.net/?retryWrites=true&w=majority&appName=webchat';
 
 export const connectDB = async () => {
     try {

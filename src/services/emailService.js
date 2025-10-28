@@ -7,8 +7,8 @@ const createTransporter = () => {
   return nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS // Use App Password for Gmail
+      user: process.env.EMAIL_USER || 'your-email@gmail.com',
+      pass: process.env.EMAIL_PASS || 'your-app-password' // Use App Password for Gmail
     }
   });
 };
@@ -19,11 +19,11 @@ export const sendPasswordResetEmail = async (email, resetToken) => {
     const transporter = createTransporter();
     
     // Create reset URL
-    const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
+    const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost:3001'}/reset-password?token=${resetToken}`;
     
     // Email template
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_USER || 'your-email@gmail.com',
       to: email,
       subject: 'Password Reset Request - Random Chat',
       html: `
@@ -93,7 +93,7 @@ export const sendWelcomeEmail = async (email, username) => {
     const transporter = createTransporter();
     
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_USER || 'your-email@gmail.com',
       to: email,
       subject: 'Welcome to Random Chat!',
       html: `
@@ -122,7 +122,7 @@ export const sendWelcomeEmail = async (email, username) => {
             </div>
             
             <div style="text-align: center; margin: 30px 0;">
-              <a href="${process.env.FRONTEND_URL}" 
+              <a href="${process.env.FRONTEND_URL || 'http://localhost:3001'}" 
                  style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
                         color: white; 
                         padding: 15px 30px; 
