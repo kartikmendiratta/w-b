@@ -13,7 +13,7 @@ const server = createServer(app);
 
 // CORS configuration - supports multiple origins
 const allowedOrigins = process.env.FRONTEND_URL 
-  ? process.env.FRONTEND_URL.split(',').map(url => url.trim())
+  ? process.env.FRONTEND_URL.split(',').map(url => url.trim().replace(/\/$/, '')) // Remove trailing slashes
   : ['http://localhost:3000', 'http://localhost:3001'];
 
 const corsOptions = {
@@ -21,7 +21,10 @@ const corsOptions = {
     // Allow requests with no origin (like mobile apps, Postman, etc.)
     if (!origin) return callback(null, true);
     
-    if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
+    // Normalize origin by removing trailing slash
+    const normalizedOrigin = origin.replace(/\/$/, '');
+    
+    if (allowedOrigins.includes(normalizedOrigin) || allowedOrigins.includes('*')) {
       callback(null, true);
     } else {
       console.log(`CORS blocked origin: ${origin}`);
