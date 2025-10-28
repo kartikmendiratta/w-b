@@ -3,10 +3,10 @@ import cors from 'cors';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import jwt from 'jsonwebtoken';
-import { connectDB } from './src/db.js';
-import authRoutes from './src/routes/auth.js';
-import roomRoutes from './src/routes/rooms.js';
-import User from './src/models/User.js';
+import { connectDB } from './db.js';
+import authRoutes from './routes/auth.js';
+import roomRoutes from './routes/rooms.js';
+import User from './models/User.js';
 
 const app = express();
 const server = createServer(app);
@@ -92,7 +92,7 @@ io.use(async (socket, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
     const user = await User.findById(decoded.userId);
     
     if (!user) {
@@ -379,7 +379,7 @@ io.on('connection', async (socket) => {
         roomUsers.get(roomId).delete(socket.userId.toString());
         
         // Check if this is the room creator leaving
-        const { default: Room } = await import('./src/models/Room.js');
+        const { default: Room } = await import('./models/Room.js');
         const room = await Room.findById(roomId);
         
         if (room && room.createdBy.toString() === socket.userId.toString()) {
@@ -465,7 +465,7 @@ io.on('connection', async (socket) => {
       socket.emit('new_room_message', messageObj);
       
       // Update room's last activity
-      const { default: Room } = await import('./src/models/Room.js');
+      const { default: Room } = await import('./models/Room.js');
       await Room.findByIdAndUpdate(roomId, {
         lastActivity: new Date()
       });
