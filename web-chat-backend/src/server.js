@@ -14,7 +14,7 @@ const server = createServer(app);
 // Socket.io configuration
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    origin: process.env.FRONTEND_URL,
     methods: ["GET", "POST"],
     credentials: true
   }
@@ -22,7 +22,7 @@ const io = new Server(server, {
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:3000",
+  origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 app.use(express.json());
@@ -76,7 +76,7 @@ io.use(async (socket, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.userId);
     
     if (!user) {
